@@ -42,7 +42,7 @@ def sample_deploy(web_code,svn_path,conf,web_path):
             with lcd('/tmp/%s' % web_code):
                 update()
         else:
-            local('git svn clone svn://10.1.0.241/%s' % svn_path)
+            local('git svn clone svn://10.1.0.241/%s %s' % (svn_path,web_code))
 
     with lcd('/tmp/%s' % web_code):
         chconfig(conf)
@@ -78,9 +78,9 @@ def prepare_deploy():
 @hosts('root@10.1.0.207')
 def test_deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
-    sample_deploy('SilverAge','web_code/专题页面/SilverAge','uat','/www')
-    with cd('/www/SilverAge/Public/js'):
-        run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
+    sample_deploy('shining','web_code/专题页面/shining','uat','/www')
+    # with cd('/www/SilverAge/Public/js'):
+    #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
 
 
 def update():
