@@ -78,7 +78,8 @@ def prepare_deploy():
 @hosts('root@10.1.0.207')
 def test_deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
-    sample_deploy('shining','web_code/专题页面/shining','uat','/www')
+    sample_deploy('hz_iphone6','web_code/专题页面/hz_iphone6','uat','/www')
+    # sample_deploy('Cancer','web_code/专题页面/Cancer','uat','/www')
     # with cd('/www/SilverAge/Public/js'):
     #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
 
@@ -95,7 +96,8 @@ def backup(web_code):
     run("tar -czf %s-%s.tar.gz %s" % (web_code,DATE_FORMAT,web_code))
 
 def chconfig(conf='uat'):
-	local("sed -i \"s/^.*APP_DEBUG.*/define('APP_DEBUG',false);/\" index.php")
+    if (conf != 'uat'):
+        local("sed -i \"s/^.*APP_DEBUG.*/define('APP_DEBUG',false);/\" index.php")
 	local("sed -i \"s/^.*APP_STATUS.*/define('APP_STATUS','%s');/\" index.php" % conf)
 
 def clearRuntime():
