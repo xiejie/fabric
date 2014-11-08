@@ -8,11 +8,6 @@ from fabric.colors import *
 """
 File: fabfile.py
 Author: Xiejie <xiejie2104@gmail.com>
-Description: 
-    10.1.0.207  test           /www
-    10.0.0.183  wechat         /php/campaign
-    10.0.0.186  prepare_deploy /php
-    10.0.0.186  deploy         /online
 TODO: 
     rsync_project
     fabric.contrib.project.upload_project
@@ -59,27 +54,23 @@ def sample_deploy(web_code,svn_path,conf,web_path):
     with cd("%s/%s" % (web_path,web_code)):
         clearRuntime()
 
-@hosts('root@10.0.0.186')
+@hosts('root@10...')
 def deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
-    sample_deploy('admin','web_code/专题页面/admin','product','/online')
 
 
-@hosts('root@10.0.0.183')
+@hosts('root@10...')
 def wechat_deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
-    sample_deploy('SilverAge','web_code/专题页面/SilverAge','product','/php/campaign')
 
-@hosts('root@10.0.0.186')
+@hosts('root@10...')
 def prepare_deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
     pass
 
-@hosts('root@10.1.0.207')
+@hosts('root@10...')
 def test_deploy():
     # sample_deploy(web_code,svn_path,conf,web_path)
-    sample_deploy('hz_iphone6','web_code/专题页面/hz_iphone6','uat','/www')
-    # sample_deploy('Cancer','web_code/专题页面/Cancer','uat','/www')
     # with cd('/www/SilverAge/Public/js'):
     #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
 
@@ -122,4 +113,4 @@ def push():
 
 def redis_clear():
     # remove picture cache
-    local("redis-cli -h 10.0.0.199 del jc_list top_data index_pic jc_data")
+    local("redis-cli -h ")
