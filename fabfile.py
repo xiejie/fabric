@@ -72,6 +72,7 @@ def prepare_deploy():
 @hosts('product')
 def online_deploy():
     campaign_deploy('admin','web_code/专题页面/admin','product','/online')
+    web_deploy('blinq','web_code/blinq_mobile','product','/online')
 
 @hosts('test')
 def test_deploy():
