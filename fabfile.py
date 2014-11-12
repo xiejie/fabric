@@ -20,16 +20,6 @@ TODO:
 env.hosts=['localhost']
 env.password='123456'
 
-def test():
-    local('./html.sh')
-
-def debug(web_code='SilverAge'):
-    with lcd('/tmp'):
-        if local_exists(web_code).succeeded:
-            print 'exists'
-        else:
-            print 'not exists'
-
 def campaign_deploy(web_code,svn_path,conf,web_path):
     # get web_code
     with lcd("/tmp/"):
@@ -74,23 +64,23 @@ def web_deploy(web_code,svn_path,conf,web_path):
     with cd("%s" % web_path):
         clearRuntime()
 
-@hosts('root@10.')
+@hosts('product')
 def prepare_deploy():
     # web_deploy(web_code,svn_path,conf,web_path):
     web_deploy('blinq','web_code/blinq_mobile','product','/php')
 
-@hosts('root@10...')
+@hosts('product')
 def online_deploy():
     campaign_deploy('admin','web_code/专题页面/admin','product','/online')
 
-@hosts('root@10...')
+@hosts('test')
 def test_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
     campaign_deploy('SilverAge','web_code/专题页面/SilverAge','uat','/www')
     # with cd('/www/SilverAge/Public/js'):
     #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
 
-@hosts('root@1...')
+@hosts('wechat')
 def wechat_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
     campaign_deploy('SilverAge','web_code/专题页面/SilverAge','product','/php/campaign')
