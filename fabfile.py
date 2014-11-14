@@ -71,15 +71,16 @@ def prepare_deploy():
 
 @hosts('product')
 def online_deploy():
-    campaign_deploy('admin','web_code/专题页面/admin','product','/online')
+    # campaign_deploy('admin','web_code/专题页面/admin','product','/online')
     web_deploy('blinq','web_code/blinq_mobile','product','/online')
 
 @hosts('test')
 def test_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
-    campaign_deploy('SilverAge','web_code/专题页面/SilverAge','uat','/www')
-    # with cd('/www/SilverAge/Public/js'):
-    #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" share.js")
+    campaign_deploy('hz_iphone6','web_code/专题页面/hz_iphone6','uat','/www')
+    with cd('/www/hz_iphone6/Public/js'):
+        run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" wxshare.js")
+        run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" loadpage.js")
 
 @hosts('wechat')
 def wechat_deploy():
@@ -104,7 +105,7 @@ def chconfig(conf='uat'):
     local('/root/fabric/html.sh')
 
 def clearRuntime():
-	run('rm -rf ./Runtime/*')
+	sudo('rm -rf ./Runtime/Cache/* ./Runtime/*.php')
 	run('chmod o+w ./Runtime -R')
 
 def local_exists(path):
@@ -123,6 +124,5 @@ def commit():
 def push():
 	local("git push")
 
-def redis_clear():
-    # remove picture cache
-    local("redis-cli -h ")
+def redis():
+    local("redis-cli -h 10.0.0.199")
