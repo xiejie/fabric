@@ -90,8 +90,8 @@ def test_deploy():
 @hosts('wechat')
 def wechat_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
-    # campaign_deploy('gz_guaguaka','web_code/专题页面/gz_guaguaka','product','/php/campaign')
-    campaign_deploy('gz_iphone6','web_code/专题页面/gz_iphone6','product','/php/campaign')
+    campaign_deploy('gz_guaguaka','web_code/专题页面/gz_guaguaka','product','/php/campaign')
+    # campaign_deploy('gz_iphone6','web_code/专题页面/gz_iphone6','product','/php/campaign')
 
 def update():
     # remove changed files, but keep unversioned files.
