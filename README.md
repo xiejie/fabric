@@ -1,10 +1,10 @@
 fabric
 ======
 
-## Install python
+### Install python
 yum install python python-devel tree
 
-## 安装[pip][pip]
+# 安装[pip][pip]
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
 
