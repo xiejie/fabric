@@ -11,14 +11,10 @@ Author: Xiejie <xiejie2104@gmail.com>
 TODO: 
     rsync_project
     fabric.contrib.project.upload_project
-    git commit & update
-    add ssh-keygen
-    tar --exclude
-
 """
 
-env.hosts=['localhost']
-env.password='123456'
+# env.hosts=['localhost']
+# env.password='123456'
 
 def campaign_deploy(web_code,svn_path,conf,web_path):
     # get web_code
@@ -77,21 +73,17 @@ def prepare_deploy():
 @hosts('product')
 def online_deploy():
     # campaign_deploy('admin','web_code/专题页面/admin','product','/online')
-    web_deploy('blinq','web_code/blinq_mobile','product','/online')
+    # web_deploy('blinq','web_code/blinq_mobile','product','/online')
 
 @hosts('test')
 def test_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
     campaign_deploy('gz_guaguaka','web_code/专题页面/gz_guaguaka','uat','/www')
-    # with cd('/www/gz_iphone6/Public/js'):
-    #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" wxshare.js")
-    #     run("sed -i \"s|\(.*\)/cp/\(.*\)|\\1/cptest/\\2|\" loadpage.js")
 
 @hosts('wechat')
 def wechat_deploy():
     # campaign_deploy(web_code,svn_path,conf,web_path)
     campaign_deploy('gz_guaguaka','web_code/专题页面/gz_guaguaka','product','/php/campaign')
-    # campaign_deploy('gz_iphone6','web_code/专题页面/gz_iphone6','product','/php/campaign')
 
 def update():
     # remove changed files, but keep unversioned files.
@@ -109,7 +101,7 @@ def chconfig(conf='uat'):
         local("sed -i \"s/^.*APP_DEBUG.*/define('APP_DEBUG',false);/\" index.php")
     local("sed -i \"s/^.*APP_STATUS.*/define('APP_STATUS','%s');/\" index.php" % conf)
     # .html clear cache
-    local('/root/fabric/html.sh')
+    local("$HOME/fabric/html.sh")
 
 def clearRuntime():
 	sudo('rm -rf ./Runtime/Cache/* ./Runtime/*.php')
@@ -124,12 +116,3 @@ def init():
 
 def clone(svn_path):
     local('git svn clone svn://10.1.0.241/%s' % svn_path)
-
-def commit():
-	local("git add -p && git commit")
-
-def push():
-	local("git push")
-
-def redis():
-    local("redis-cli -h 10.0.0.199")
