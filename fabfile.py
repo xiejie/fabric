@@ -51,7 +51,7 @@ def campaign_deploy(web_code,svn_path,conf,web_path):
     with lcd("/tmp"):
         local("tar -czf %s.tar.gz %s/ --exclude *.html.bak --exclude *.sql --exclude .git --exclude Runtime" % (web_code,web_code))
         put("%s.tar.gz" % web_code,"/tmp/%s.tar.gz" % web_code)
-        # local("rm -f %s.tar.gz" % web_code)
+        local("rm -f %s.tar.gz" % web_code)
     with cd('/tmp'):
         run("tar zxf %s.tar.gz -C %s" % (web_code,web_path))
         run("rm -f %s.tar.gz" % web_code)
