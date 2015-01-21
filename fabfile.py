@@ -70,14 +70,19 @@ def web_deploy(web_code,svn_path,conf,web_path):
 
     with lcd('/tmp/%s' % web_code):
         chconfig(conf)
-        local("tar czf %s.tar.gz *" % web_code)
+        local("tar czf %s.tar.gz * --exclude *.html.bak --exclude *.sql --exclude .git --exclude Runtime" % web_code)
         put("%s.tar.gz" % web_code,"/tmp/%s.tar.gz" % web_code)
         local("rm -f %s.tar.gz" % web_code)
     with cd('/tmp'):
         run("tar zxf %s.tar.gz -C %s" % (web_code,web_path))
         run("rm -f %s.tar.gz" % web_code)
+
     with cd("%s" % web_path):
-        clearRuntime()
+        if not exists("%s/Runtime" % web_path):
+            run('mkdir Runtime')
+            run('chmod o+w ./Runtime -R')
+        else:
+            sudo('rm -rf ./Runtime/Cache/* ./Runtime/*.php')
 
 def update():
     # remove changed files, but keep unversioned files.
