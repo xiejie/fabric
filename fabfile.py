@@ -22,7 +22,8 @@ def test_deploy():
 @hosts('root@product')
 def prepare_deploy():
     # web_deploy(web_code,svn_path,conf,web_path):
-    web_deploy('blinq','web_code/blinq_mobile','product','/php')
+    campaign_deploy('admin','web_code/专题页面/admin','product','/php')
+    # web_deploy('blinq','web_code/blinq_mobile','product','/php')
     # campaign_deploy('ThinkPHP','web_code/ThinkPHP','product','/php')
 
 @hosts('root@product')
@@ -80,7 +81,7 @@ def web_deploy(web_code,svn_path,conf,web_path):
     with cd("%s" % web_path):
         if not exists("%s/Runtime" % web_path):
             run('mkdir Runtime')
-            run('chmod o+w ./Runtime -R')
+            run('chmod 777 ./Runtime -R')
         else:
             sudo('rm -rf ./Runtime/Cache/* ./Runtime/*.php')
 
@@ -106,7 +107,7 @@ def clearRuntime(web_path,web_code):
     with cd("%s/%s" % (web_path,web_code)):
         if not exists("%s/%s/Runtime" % (web_path,web_code)):
             run('mkdir Runtime')
-            run('chmod o+w ./Runtime -R')
+            run('chmod 777 ./Runtime -R')
         else:
             sudo('rm -rf ./Runtime/Cache/* ./Runtime/*.php')
 
