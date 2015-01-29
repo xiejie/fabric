@@ -27,8 +27,8 @@ def prepare_deploy():
 
 @hosts('root@product')
 def online_deploy():
-    # campaign_deploy('admin','web_code/专题页面/admin','product','/online')
-    web_deploy('blinq','web_code/blinq_mobile','product','/online')
+    campaign_deploy('admin','web_code/专题页面/admin','product','/online')
+    # web_deploy('blinq','web_code/blinq_mobile','product','/online')
 
 @hosts('root@wechat')
 def wechat_deploy():
