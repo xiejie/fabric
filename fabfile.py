@@ -22,7 +22,6 @@ def test_deploy():
 @hosts('root@product')
 def prepare_deploy():
     # web_deploy(web_code,svn_path,conf,web_path):
-    campaign_deploy('admin','web_code/专题页面/admin','product','/php')
     # web_deploy('blinq','web_code/blinq_mobile','product','/php')
     # campaign_deploy('ThinkPHP','web_code/ThinkPHP','product','/php')
 
