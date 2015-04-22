@@ -8,8 +8,6 @@ do
     for html in `find $view -name \*.html`
     do
         sed -i.bak -e "s|\(<.*src=.*\)\.js\(\?.*\)\{0,1\}\(['\"]\)\(.*>\)|\1\.js\?time=$time\3\4|g" \
-                   -e "s|\(<.*href=.*\)\.css\(\?.*\)\{0,1\}\(['\"]\)\(.*>\)|\1\.css\?time=$time\3\4|g" $html
+                   -e "s|\(<.*href=.*\)\.css\(\?[^'\"]*\)\{0,1\}\(['\"]\)\(.*>\)|\1\.css\?time=$time\3\4|g" $html
     done
 done
-
-
